@@ -1,10 +1,10 @@
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
 const Doctors = () => {
-    // Youtube Time: 2:09:00
-    // Figma: https://www.figma.com/design/ZLkjwG5ehxNRrC4SUA2WG7/Prescripto---UI-Design?node-id=0-1&p=f&t=nyiWlciroPSNonhA-0
     const { speciality } = useParams();
     const { doctors } = useContext(AppContext);
     const [filteredDoctors, setFilteredDoctors] = useState([]);
@@ -29,8 +29,17 @@ const Doctors = () => {
     ];
 
     useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            delay: 100,
+            offset: 200
+        });
         applyFilter();
     }, [doctors, speciality]);
+
+    useEffect(() => {
+        AOS.refresh();
+    }, [filteredDoctors]);
 
     return (
         <>
@@ -58,14 +67,14 @@ const Doctors = () => {
                         ))}
                     </div>
                     <div className="w-full pr-2">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 gap-y-6">
+                        <div key={speciality || "all"} data-aos="fade-up" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 gap-y-6">
                             {filteredDoctors.length === 0 && (
                                 <p className="text-gray-500 text-lg col-span-full">
                                     No doctors found for this speciality.
                                 </p>
                             )}
                             {filteredDoctors.map((item, index) => (
-                                <div onClick={() => navigate(`/appointment/${item._id}`)} className='border !border-blue-300 rounded-xl overflow-hidden hover:translate-y-[-15px] transition-all duration-500 cursor-pointer' key={index}>
+                                <div onClick={() => { scrollTo(0, 0), navigate(`/appointment/${item._id}`) }} className='border !border-blue-300 rounded-xl overflow-hidden hover:translate-y-[-15px] transition-all duration-500 cursor-pointer' key={index}>
                                     <img className='bg-blue-100' src={item.image} alt={item.name} />
                                     <div className='p-4'>
                                         <div className='flex items-center gap-2 text-sm text-center text-green-500'>
