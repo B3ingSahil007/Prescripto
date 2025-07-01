@@ -115,13 +115,13 @@ export const doctors = [
         }
     },
     {
-        _id: 'Dr.SarahPatel',
-        name: 'Dr. Sarah Patel',
+        _id: 'Dr.AryanShah',
+        name: 'Dr. Aryan Shah',
         image: doc3,
         speciality: 'Dermatologist',
         degree: 'MD in Dermatology',
         experience: '5 Years',
-        about: 'Dr. Patel is board-certified in medical and cosmetic dermatology. She specializes in skin cancer prevention, acne treatments, and anti-aging procedures using the latest technologies.',
+        about: 'Dr. Shah is board-certified in medical and cosmetic dermatology. He specializes in skin cancer prevention, acne treatments, and anti-aging procedures using the latest technologies.',
         fees: 7885,
         address: {
             line1: '789 Skin Care Center',

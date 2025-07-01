@@ -3,11 +3,13 @@ import 'aos/dist/aos.css';
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import { FiFilter } from "react-icons/fi";
 
 const Doctors = () => {
     const { speciality } = useParams();
     const { doctors } = useContext(AppContext);
     const [filteredDoctors, setFilteredDoctors] = useState([]);
+    const [showMobileFilters, setShowMobileFilters] = useState(false);
     const navigate = useNavigate();
 
     const applyFilter = () => {
@@ -20,7 +22,7 @@ const Doctors = () => {
 
     const specialities = [
         { label: "All Doctors", value: "" },
-        { label: "General Physician", value: "GeneralPhysician" },
+        { label: "General Physician", value: "General Physician" },
         { label: "Gynecologist", value: "Gynecologist" },
         { label: "Dermatologist", value: "Dermatologist" },
         { label: "Pediatricians", value: "Pediatricians" },
@@ -43,29 +45,44 @@ const Doctors = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center my-3">
+            <div className="flex flex-col items-center my-4">
                 {speciality ? (
-                    <p className="text-3xl font-medium text-gray-600">
+                    <p className="text-xl sm:text-3xl font-medium text-gray-600">
                         Browse through our extensive list of trusted doctors for {speciality}.
                     </p>
                 ) : (
-                    <p className="text-3xl font-medium text-gray-600">
+                    <p className="text-xl sm:text-3xl font-medium text-gray-600">
                         Browse through our extensive list of trusted doctors.
                     </p>
                 )}
-                <div data-aos="zoom-in" className="flex flex-col sm:flex-row items-start gap-5 mt-10">
-                    {/* Filter Sidebar */}
-                    <div className="flex flex-col gap-3 text-sm">
-                        {specialities.map(({ label, value }, index) => (
-                            <p
-                                key={index}
-                                onClick={() => navigate(value ? `/doctors/${value}` : "/doctors")}
-                                className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-primary rounded transition-all cursor-pointer hover:bg-primary/60 hover:text-white ${speciality === value ? "bg-primary/50 text-white" : ""} `}
-                            >
-                                {label}
-                            </p>
-                        ))}
+
+                {/* Mobile Filter Button - Only visible on small screens */}
+                <button
+                    onClick={() => setShowMobileFilters(!showMobileFilters)}
+                    className="sm:hidden flex items-center gap-2 bg-primary text-white py-2 px-4 rounded-lg mt-6 mb-4"
+                >
+                    <FiFilter /> Filters
+                </button>
+
+                <div data-aos="zoom-in" className="flex flex-col sm:flex-row items-start gap-5 mt-4 sm:mt-10">
+                    {/* Filter Sidebar - Hidden on mobile unless showMobileFilters is true */}
+                    <div className={`${showMobileFilters ? 'block' : 'hidden'} sm:block`}>
+                        <div className="flex flex-col gap-3 text-sm">
+                            {specialities.map(({ label, value }, index) => (
+                                <p
+                                    key={index}
+                                    onClick={() => {
+                                        navigate(value ? `/doctors/${value}` : "/doctors");
+                                        setShowMobileFilters(false);
+                                    }}
+                                    className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-primary rounded transition-all cursor-pointer hover:bg-primary/60 hover:text-white ${speciality === value ? "bg-primary/50 text-white" : ""} `}
+                                >
+                                    {label}
+                                </p>
+                            ))}
+                        </div>
                     </div>
+
                     <div className="w-full pr-2">
                         <div key={speciality || "all"} data-aos="fade-up" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 gap-y-6">
                             {filteredDoctors.length === 0 && (
