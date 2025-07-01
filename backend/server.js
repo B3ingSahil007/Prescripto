@@ -7,6 +7,13 @@ import adminRouter from './routes/adminRoute.js';
 import doctorRouter from './routes/doctorRoute.js';
 import userRouter from './routes/userRoute.js';
 
+// CORS
+const corsOptions = {
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'prescripto-frontend-xi-three.vercel.app', 'prescripto-admin-opal.vercel.app'], // Allow both 5173 and 5174
+    methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH, PROPFIND',
+    credentials: true
+}
+
 // App Config
 const app = express();
 const port = process.env.PORT || 4000;
@@ -19,7 +26,7 @@ connectCloudinary();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // API Endpoints
 app.use('/api/admin', adminRouter);
