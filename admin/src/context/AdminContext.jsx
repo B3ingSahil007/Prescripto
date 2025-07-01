@@ -6,7 +6,7 @@ export const AdminContext = createContext();
 
 const AdminContextProvider = ({ children }) => {
     const [adminToken, setAdminToken] = useState(localStorage.getItem('adminToken') ? localStorage.getItem('adminToken') : '');
-    const backendUrl = import.meta.env.VITE_PRESCRIPTO_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_PRESCRIPTO_BACKEND_URL || 'https://prescripto-backend.vercel.app/';
     const [doctors, setDoctors] = useState([]);
     const [appointments, setAppointments] = useState([]);
     const [dashData, setDashData] = useState(false);
