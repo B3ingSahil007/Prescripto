@@ -208,7 +208,7 @@ const DoctorDashboard = () => {
     }, [appointments, dashData]); // Add dashData as dependency
 
     return (
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto w-[85%] px-4 py-4">
             <h1 className="text-3xl font-bold text-gray-800 mb-4">Doctor Dashboard</h1>
 
             {/* Stats Cards */}
@@ -375,18 +375,18 @@ const DoctorDashboard = () => {
 
             {/* Recent Activity */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-200">
+                <div className="px-4 sm:px-6 py-4 border-b border-gray-200">
                     <h3 className="text-lg font-semibold">Recent Activity</h3>
                 </div>
                 <div className="divide-y divide-gray-200">
                     {appointments && getRecentActivity().length > 0 ? (
                         getRecentActivity().map(appointment => (
-                            <div key={appointment._id} className="px-6 py-4">
+                            <div key={appointment._id} className="px-4 sm:px-6 py-4">
                                 <div className="flex items-center">
                                     <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
                                         <FaUserMd className="text-blue-500" />
                                     </div>
-                                    <div className="ml-4 flex gap-10">
+                                    <div className="ml-4 flex flex-col sm:flex-row sm:gap-4 lg:gap-10">
                                         <p className="text-sm font-medium text-gray-900">
                                             Appointment with {appointment.userData?.firstname || "Unknown"} {appointment.userData?.lastname || ""}
                                         </p>

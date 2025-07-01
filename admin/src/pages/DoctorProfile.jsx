@@ -211,11 +211,11 @@ const DoctorProfile = () => {
 
     return (
         <div className="container mx-auto px-4 py-4">
-            <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-bold text-gray-800">Doctor Profile</h1>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Doctor Profile</h1>
                 <button
                     onClick={() => isEditing ? handleSave() : setIsEditing(true)}
-                    className={`flex items-center px-4 py-2 rounded-lg ${isEditing ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'} text-white`}
+                    className={`flex items-center px-4 py-2 rounded-lg ${isEditing ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'} text-white w-full sm:w-auto justify-center`}
                 >
                     {isEditing ? (
                         <>
@@ -229,9 +229,9 @@ const DoctorProfile = () => {
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Left Column - Profile Card */}
-                <div className="bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 transition-all duration-300">
+                <div className="bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 transition-all duration-300 md:col-span-2 lg:col-span-1">
                     <div className="bg-blue-500 h-32 relative">
                         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
                             <div className="h-32 w-32 rounded-full border-4 border-white bg-gray-200 overflow-hidden">
@@ -332,7 +332,7 @@ const DoctorProfile = () => {
                 </div>
 
                 {/* Middle Column - About and Schedule */}
-                <div className="space-y-8">
+                <div className="space-y-6 md:col-span-2 lg:col-span-1">
                     {/* About Section */}
                     <div className="bg-white rounded-xl shadow-md p-6 hover:scale-105 transition-all duration-300">
                         <h3 className="text-xl font-semibold mb-4 flex items-center">
@@ -379,7 +379,7 @@ const DoctorProfile = () => {
                 </div>
 
                 {/* Right Column - Schedule and Stats */}
-                <div className="space-y-8">
+                <div className="space-y-6 md:col-span-2 lg:col-span-1">
                     {/* Availability */}
                     <div className="bg-white rounded-xl shadow-md p-6 hover:scale-105 transition-all duration-300">
                         <h3 className="text-xl font-semibold mb-4 flex items-center">
@@ -475,7 +475,7 @@ const DoctorProfile = () => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

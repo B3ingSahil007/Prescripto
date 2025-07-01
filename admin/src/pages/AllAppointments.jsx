@@ -75,42 +75,42 @@ const AllAppointments = () => {
     };
 
     return (
-        <div className='w-full max-w-8xl mx-auto p-4 sm:p-6'>
+        <div className='w-[85%] mx-auto p-4 sm:p-6'>
             <h1 className='text-2xl font-semibold text-gray-800 mb-6'>All Patient's Booked Appointments</h1>
 
             <div className='bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden'>
-                <div className='max-h-[70vh] overflow-y-auto'>
+                <div className='overflow-x-auto'>
                     <table className='min-w-full divide-y divide-gray-200 text-center'>
                         <thead className='bg-blue-300 text-xs font-medium uppercase tracking-wider'>
                             <tr>
-                                <th scope='col' className='px-2 py-3'>
+                                <th scope='col' className='px-2 py-3 whitespace-nowrap'>
                                     Sr. No
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Patient
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Age
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Gender
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Number
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Date & Time
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Doctor
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Fees
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Status
                                 </th>
-                                <th scope='col' className='px-4 py-3'>
+                                <th scope='col' className='px-4 py-3 whitespace-nowrap'>
                                     Actions
                                 </th>
                             </tr>
@@ -205,8 +205,8 @@ const AllAppointments = () => {
 
             {/* Appointment Details Modal */}
             {isModalOpen && selectedAppointment && (
-                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
-                    <div data-aos="zoom-in" className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
+                    <div className="relative bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
                         <div className="p-6">
                             <div className="flex justify-between items-start border-b pb-4">
                                 <h3 className="text-xl font-semibold text-gray-900">
@@ -363,8 +363,8 @@ const AllAppointments = () => {
 
             {/* Cancel Confirmation Modal */}
             {isCancelModalOpen && appointmentToCancel && (
-                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
-                    <div data-aos="zoom-in" className="relative bg-white rounded-lg shadow-xl max-w-md w-full">
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
+                    <div className="relative bg-white rounded-lg shadow-xl w-full max-w-md">
                         <div className="p-6">
                             <div className="flex justify-between items-start border-b pb-4">
                                 <h3 className="text-xl font-semibold text-gray-900">

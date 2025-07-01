@@ -6,7 +6,7 @@ export const DoctorContext = createContext();
 
 const DoctorContextProvider = ({ children }) => {
 
-    const backendURL = import.meta.env.VITE_PRESCRIPTO_BACKEND_URL || 'https://prescripto-backend.vercel.app/';
+    const backendURL = import.meta.env.VITE_PRESCRIPTO_BACKEND_URL || 'https://prescripto-backend.vercel.app';
     const [doctorToken, setDoctorToken] = useState(localStorage.getItem('doctorToken') ? localStorage.getItem('doctorToken') : '');
     const [appointments, setAppointments] = useState([]);
     const [dashData, setDashData] = useState(false);

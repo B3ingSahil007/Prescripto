@@ -40,7 +40,6 @@ const AddDoctor = () => {
             formData.append('degree', degree);
             formData.append('address1', JSON.stringify({ line1: address1, line2: address2 }));
 
-            // In your handleSubmit function, update the headers:
             const { data } = await axios.post(`${backendUrl}/api/admin/add-doctor`, formData, {
                 headers: {
                     'Authorization': `Bearer ${adminToken}`,
@@ -77,9 +76,9 @@ const AddDoctor = () => {
     return (
         <div className="w-full m-5">
             <h2 className="text-xl font-medium mb-3">Add Doctors</h2>
-            <form onSubmit={handleSubmit} className="px-8 py-8 border border-blue-300 rounded-lg w-full  max-h-[80vh] overflow-y-scroll">
-                {/* Image Upload */}
-                <div className="w-96 flex flex-col items-center justify-center border-2 border-dashed border-blue-300 rounded-lg p-2 mb-6">
+            <form onSubmit={handleSubmit} className="px-4 sm:px-8 py-8 border border-blue-300 rounded-lg w-full max-h-[80vh] overflow-y-auto">
+                {/* Image Upload - Made responsive */}
+                <div className="w-full sm:w-96 flex flex-col items-center justify-center border-2 border-dashed border-blue-300 rounded-lg p-2 mb-6 mx-auto">
                     {docImg ?
                         <img className="w-40 h-40 object-cover" src={URL.createObjectURL(docImg)} alt="Doctor_Image" />
                         :
@@ -90,8 +89,8 @@ const AddDoctor = () => {
                     <input onChange={(e) => setDocImg(e.target.files[0])} type="file" id="doc-img" className="hidden" />
                 </div>
 
-                {/* Grid Layout for Input Fields */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Grid Layout for Input Fields - Made responsive */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     {/* Doctor Name */}
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -122,7 +121,6 @@ const AddDoctor = () => {
                         </select>
                     </div>
 
-
                     {/* Doctor Email */}
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -147,7 +145,7 @@ const AddDoctor = () => {
                         <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" id="password" className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Create a password" />
                     </div>
 
-                    {/* Address 1 */}
+                    {/* Address */}
                     <div>
                         <label htmlFor="address1" className="block text-sm font-medium text-gray-700 mb-1">
                             Address
@@ -173,8 +171,6 @@ const AddDoctor = () => {
                         </label>
                         <input onChange={(e) => setFees(e.target.value)} value={fees} type="number" id="fees" className="w-full px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter consultation fees" />
                     </div>
-
-
                 </div>
 
                 {/* About Me */}

@@ -15,7 +15,6 @@ const Dashboard = () => {
         getDashData,
         dashData
     } = useContext(AdminContext);
-    // console.log(dashData);
 
     const [stats, setStats] = useState({
         totalDoctors: 0,
@@ -35,7 +34,6 @@ const Dashboard = () => {
             getDashData();
         }
     }, [adminToken]);
-
 
     useEffect(() => {
         if (doctors.length > 0 || appointments.length > 0) {
@@ -126,10 +124,10 @@ const Dashboard = () => {
         <div className="min-h-screen w-full bg-gray-50 p-4 md:p-5 overflow-y-auto">
             <h1 className="text-2xl font-bold text-gray-800 mb-5">Dashboard Overview</h1>
 
-            {/* Stats Cards */}
+            {/* Stats Cards - unchanged */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {/* Total Doctors Card */}
-                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-6 flex items-center">
+                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-4 flex items-center">
                     <div className="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
                         <FaUserMd size={24} />
                     </div>
@@ -141,7 +139,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Total Appointments Card */}
-                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-6 flex items-center">
+                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-4 flex items-center">
                     <div className="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
                         <FaCalendarAlt size={24} />
                     </div>
@@ -153,7 +151,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Upcoming Appointments Card */}
-                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-6 flex items-center">
+                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-4 flex items-center">
                     <div className="p-3 rounded-full bg-green-100 text-green-600 mr-4">
                         <FaCalendarCheck size={24} />
                     </div>
@@ -165,7 +163,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Canceled Appointments Card */}
-                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-6 flex items-center">
+                <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-4 flex items-center">
                     <div className="p-3 rounded-full bg-red-100 text-red-600 mr-4">
                         <FaCalendarTimes size={24} />
                     </div>
@@ -177,36 +175,48 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* Second Row - Charts */}
+            {/* Second Row - Charts with responsive fixes */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                {/* Appointment Trends Chart */}
-                <div className="bg-white rounded-lg shadow-xl p-6 lg:col-span-2">
+                {/* Appointment Trends Chart - now responsive */}
+                <div className="bg-white rounded-lg shadow-xl p-4 lg:col-span-2">
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">Appointment Trends</h3>
-                    <Bar
-                        data={appointmentTrendData}
-                        options={{
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'top',
+                    <div className="relative h-64 sm:h-80 md:h-96">
+                        <Bar
+                            data={appointmentTrendData}
+                            options={{
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'top',
+                                    },
                                 },
-                            },
-                        }}
-                    />
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            autoSkip: true,
+                                            maxRotation: 0,
+                                            minRotation: 0
+                                        }
+                                    }
+                                }
+                            }}
+                        />
+                    </div>
                 </div>
 
-                {/* Revenue Card */}
-                <div className="bg-white rounded-lg shadow-xl p-6">
+                {/* Revenue Card - now responsive */}
+                <div className="bg-white rounded-lg shadow-xl p-4">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-semibold text-gray-800">Revenue</h3>
                         <div className="p-2 rounded-full bg-indigo-100 text-indigo-600">
                             <FaChartLine size={20} />
                         </div>
                     </div>
-                    <div className="text-center py-8">
+                    <div className="text-center">
                         <p className="text-4xl font-bold text-gray-800 mb-2">₹{stats.revenue.toLocaleString()}</p>
                         <p className="text-green-500 text-sm mb-4">+0% from last month</p>
-                        <div className="h-40">
+                        <div className="relative h-48 sm:h-56 md:h-64">
                             <Bar
                                 data={revenueData}
                                 options={{
@@ -217,6 +227,15 @@ const Dashboard = () => {
                                             display: false,
                                         },
                                     },
+                                    scales: {
+                                        x: {
+                                            ticks: {
+                                                autoSkip: true,
+                                                maxRotation: 0,
+                                                minRotation: 0
+                                            }
+                                        }
+                                    }
                                 }}
                             />
                         </div>
@@ -227,9 +246,9 @@ const Dashboard = () => {
             {/* Third Row - Recent Appointments and Revenue */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Recent Appointments */}
-                <div className="bg-white rounded-lg shadow-xl p-6 lg:col-span-2">
+                <div className="bg-white rounded-lg shadow-xl p-4 lg:col-span-2 overflow-x-auto">
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Appointments</h3>
-                    <div className="overflow-x-auto">
+                    <div className="min-w-[600px] sm:min-w-0">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
@@ -264,9 +283,9 @@ const Dashboard = () => {
                     </div>
                 </div>
                 {/* Additional Info Section */}
-                <div className="mt-8 grid grid-cols-1 gap-6">
+                <div className="grid grid-cols-1 gap-6">
                     {/* Total Users Card */}
-                    <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-6">
+                    <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-4">
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-500 text-sm">Total Users</p>
@@ -280,7 +299,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* System Health Card */}
-                    <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-6">
+                    <div className="bg-white rounded-lg shadow-xl hover:scale-105 transition-all duration-500 p-4">
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-gray-500 text-sm">System Health</p>

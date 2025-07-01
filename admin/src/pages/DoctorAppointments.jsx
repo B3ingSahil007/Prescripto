@@ -97,87 +97,91 @@ const DoctorAppointments = () => {
     }, [doctorToken, currentPage, itemsPerPage]);
 
     return (
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto w-[85%] px-4 py-4">
             <h1 className="text-2xl font-bold mb-6">My Appointments</h1>
 
             <div className="overflow-x-auto rounded-lg">
                 <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                     <thead className="border-b bg-blue-300">
                         <tr>
-                            <th className="py-3 px-4">Patient</th>
-                            <th className="py-3 px-4">Age</th>
-                            <th className="py-3 px-4">Gender</th>
-                            <th className="py-3 px-4">Address</th>
-                            <th className="py-3 px-4">Date</th>
-                            <th className="py-3 px-4">Time</th>
-                            <th className="py-3 px-4">Fees</th>
-                            <th className="py-3 px-4">Status</th>
-                            <th className="py-3 px-4">Action</th>
+                            <th className="py-3 px-2 sm:px-4">Patient</th>
+                            <th className="py-3 px-2 sm:px-4">Age</th>
+                            <th className="py-3 px-2 sm:px-4 hidden sm:table-cell">Gender</th>
+                            <th className="py-3 px-2 sm:px-4 hidden md:table-cell">Address</th>
+                            <th className="py-3 px-2 sm:px-4">Date</th>
+                            <th className="py-3 px-2 sm:px-4">Time</th>
+                            <th className="py-3 px-2 sm:px-4">Fees</th>
+                            <th className="py-3 px-2 sm:px-4">Status</th>
+                            <th className="py-3 px-2 sm:px-4">Action</th>
                         </tr>
                     </thead>
                     <tbody className="text-center">
                         {appointments?.map((appointment) => (
                             <tr key={appointment._id} className="hover:bg-gray-50 border-b">
-                                <td className="py-3 px-4">
+                                <td className="py-3 px-2 sm:px-4">
                                     <div className="flex items-center">
-                                        <img src={appointment.userData.image} alt={appointment.userData.firstname} className="w-10 h-10 rounded-full mr-3" />
+                                        <img src={appointment.userData.image} alt={appointment.userData.firstname} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3" />
                                         <div>
-                                            <p className="font-medium">
+                                            <p className="font-medium text-sm sm:text-base">
                                                 {appointment.userData.firstname} {appointment.userData.lastname}
                                             </p>
-                                            <p className="text-sm text-gray-500">{appointment.userData.phone}</p>
+                                            <p className="text-xs sm:text-sm text-gray-500">{appointment.userData.phone}</p>
                                         </div>
                                     </div>
                                 </td>
-                                <td className="py-3 px-4">
+                                <td className="py-3 px-2 sm:px-4">
                                     <div>
-                                        <p>{calculateAge(appointment.userData.dob)} years</p>
+                                        <p className="text-sm sm:text-base">{calculateAge(appointment.userData.dob)} years</p>
                                         <p className="text-xs text-gray-500">{formatDOB(appointment.userData.dob) || "N/A"}</p>
                                     </div>
                                 </td>
-                                <td className="py-3 px-4">{appointment.userData.gender || "N/A"}</td>
-                                <td className="py-3 px-4">
+                                <td className="py-3 px-2 sm:px-4 hidden sm:table-cell">{appointment.userData.gender || "N/A"}</td>
+                                <td className="py-3 px-2 sm:px-4 hidden md:table-cell">
                                     <div className="max-w-xs truncate">{appointment.userData.address.line1 + "..." || "N/A"}</div>
                                 </td>
-                                <td className="py-3 px-4">{formatDate(appointment.slotDate)}</td>
-                                <td className="py-3 px-4">{appointment.slotTime}</td>
-                                <td className="py-3 px-4">
+                                <td className="py-3 px-2 sm:px-4">
+                                    <span className="text-sm sm:text-base">{formatDate(appointment.slotDate)}</span>
+                                </td>
+                                <td className="py-3 px-2 sm:px-4">
+                                    <span className="text-sm sm:text-base">{appointment.slotTime}</span>
+                                </td>
+                                <td className="py-3 px-2 sm:px-4">
                                     <div>
-                                        ₹{appointment.amount}
+                                        <span className="text-sm sm:text-base">₹{appointment.amount}</span>
                                         <p className="text-xs text-gray-500">{appointment.payment === 'true' ? 'Paid' : 'Cash'}</p>
                                     </div>
                                 </td>
-                                <td className="py-3 px-4">
+                                <td className="py-3 px-2 sm:px-4">
                                     <span className={`px-2 py-1 rounded-full text-xs ${appointment.cancelled ? "bg-red-100 text-red-800" : appointment.isCompleted ? "bg-green-100 text-green-800" : "bg-blue-100 text-blue-800"}`}>
                                         {appointment.cancelled ? "Cancelled" : appointment.isCompleted ? "Completed" : "Upcoming"}
                                     </span>
                                 </td>
-                                <td className="py-3 px-2">
-                                    <div className="flex space-x-2">
-                                        <button className="text-blue-500 hover:bg-blue-300 hover:text-black rounded transition duration-300 p-2" onClick={() => openModal(appointment)} title="View Details">
-                                            <FaEye />
+                                <td className="py-3 px-1 sm:px-2">
+                                    <div className="flex space-x-1 sm:space-x-2">
+                                        <button className="text-blue-500 hover:bg-blue-300 hover:text-black rounded transition duration-300 p-1 sm:p-2" onClick={() => openModal(appointment)} title="View Details">
+                                            <FaEye className="text-sm sm:text-base" />
                                         </button>
                                         {appointment.cancelled ? (
-                                            <p className="text-red-500 items-center p-1 flex">Cancelled</p>
+                                            <p className="text-red-500 items-center p-1 flex text-xs sm:text-sm">Cancelled</p>
                                         ) : appointment.isCompleted ? (
-                                            <p className="text-green-500 items-center p-1 flex">Completed</p>
+                                            <p className="text-green-500 items-center p-1 flex text-xs sm:text-sm">Completed</p>
                                         ) : (
                                             <>
                                                 <button
-                                                    className="text-green-500 hover:bg-green-300 hover:text-black rounded transition duration-300 p-2"
+                                                    className="text-green-500 hover:bg-green-300 hover:text-black rounded transition duration-300 p-1 sm:p-2"
                                                     onClick={() => {
                                                         openConfirmationModal("complete", appointment);
                                                     }}
                                                     title="Mark as Complete">
-                                                    <FaCheck />
+                                                    <FaCheck className="text-sm sm:text-base" />
                                                 </button>
                                                 <button
-                                                    className="text-red-500 hover:bg-red-300 hover:text-black rounded transition duration-300 p-2"
+                                                    className="text-red-500 hover:bg-red-300 hover:text-black rounded transition duration-300 p-1 sm:p-2"
                                                     onClick={() => {
                                                         openConfirmationModal("cancel", appointment);
                                                     }}
                                                     title="Cancel Appointment">
-                                                    <RxCrossCircled />
+                                                    <RxCrossCircled className="text-sm sm:text-base" />
                                                 </button>
                                             </>
                                         )}
@@ -260,7 +264,7 @@ const DoctorAppointments = () => {
                 </div>
             </div>
 
-            {/* Modal for viewing appointment details */}
+            {/* Modal for viewing appointment details - keep exactly the same */}
             {isModalOpen && selectedAppointment && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
                     <div data-aos="zoom-in" className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
@@ -341,7 +345,7 @@ const DoctorAppointments = () => {
                 </div>
             )}
 
-            {/* Confirmation Modal */}
+            {/* Confirmation Modal - keep exactly the same */}
             {isConfirmationModalOpen && appointmentToConfirm && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
                     <div data-aos="zoom-in" className="bg-white rounded-lg p-6 max-w-md w-full">
