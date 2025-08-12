@@ -48,6 +48,8 @@ const AllAppointments = () => {
 
     const openModal = (appointment) => {
         setSelectedAppointment(appointment);
+        console.log(appointment);
+
         setIsModalOpen(true);
     };
 
@@ -206,6 +208,7 @@ const AllAppointments = () => {
             {/* Appointment Details Modal */}
             {isModalOpen && selectedAppointment && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
+                    {console.log(typeof (selectedAppointment), "selectedAppointment")}
                     <div className="relative bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
                         <div className="p-6">
                             <div className="flex justify-between items-start border-b pb-4">
@@ -230,32 +233,32 @@ const AllAppointments = () => {
                                         <div>
                                             <p className="text-sm text-gray-500">Name</p>
                                             <p className="font-medium">
-                                                {selectedAppointment.userData?.firstname} {selectedAppointment.userData?.lastname}
+                                                {selectedAppointment?.userData?.firstname} {selectedAppointment?.userData?.lastname}
                                             </p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Email</p>
-                                            <p className="font-medium">{selectedAppointment.userData?.email}</p>
+                                            <p className="font-medium">{selectedAppointment?.userData?.email}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Phone</p>
-                                            <p className="font-medium">{selectedAppointment.userData?.phone}</p>
+                                            <p className="font-medium">{selectedAppointment?.userData?.phone}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Date of Birth</p>
                                             <p className="font-medium">
-                                                {selectedAppointment.userData?.dob} (Age: {calculateAge(selectedAppointment.userData?.dob)})
+                                                {selectedAppointment?.userData?.dob} (Age: {calculateAge(selectedAppointment?.userData?.dob)})
                                             </p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Gender</p>
-                                            <p className="font-medium">{selectedAppointment.userData?.gender}</p>
+                                            <p className="font-medium">{selectedAppointment?.userData?.gender || 'N/A'}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Address</p>
                                             <p className="font-medium">
-                                                {selectedAppointment.userData?.address?.line1}<br />
-                                                {selectedAppointment.userData?.address?.line2}
+                                                {selectedAppointment?.userData?.address?.line1}<br />
+                                                {selectedAppointment?.userData?.address?.line2}
                                             </p>
                                         </div>
                                     </div>
@@ -267,38 +270,38 @@ const AllAppointments = () => {
                                     <div className="space-y-3">
                                         <div>
                                             <p className="text-sm text-gray-500">Appointment ID</p>
-                                            <p className="font-medium">{selectedAppointment._id}</p>
+                                            <p className="font-medium">{selectedAppointment?._id}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Date & Time</p>
                                             <p className="font-medium">
-                                                {formatDate(selectedAppointment.slotDate)} at {selectedAppointment.slotTime}
+                                                {formatDate(selectedAppointment?.slotDate)} at {selectedAppointment?.slotTime}
                                             </p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Status</p>
                                             <div className="mt-1">
                                                 <StatusBadge status={
-                                                    selectedAppointment.cancelled ? 'cancelled' :
-                                                        selectedAppointment.isCompleted ? 'completed' : 'upcoming'
+                                                    selectedAppointment?.cancelled ? 'cancelled' :
+                                                        selectedAppointment?.isCompleted ? 'completed' : 'upcoming'
                                                 } />
                                             </div>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Booked On</p>
                                             <p className="font-medium">
-                                                {new Date(selectedAppointment.date).toLocaleString()}
+                                                {new Date(selectedAppointment?.date).toLocaleString()}
                                             </p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Payment Status</p>
                                             <p className="font-medium">
-                                                {selectedAppointment.payment ? 'Paid' : 'Pending'}
+                                                {selectedAppointment?.payment ? 'Paid' : 'Pending'}
                                             </p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Amount Paid</p>
-                                            <p className="font-medium">₹{selectedAppointment.amount}</p>
+                                            <p className="font-medium">₹{selectedAppointment?.amount}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -309,39 +312,56 @@ const AllAppointments = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div>
                                             <p className="text-sm text-gray-500">Name</p>
-                                            <p className="font-medium">{selectedAppointment.docData?.name}</p>
+                                            <p className="font-medium">{selectedAppointment?.docData?.name}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Speciality</p>
-                                            <p className="font-medium">{selectedAppointment.docData?.speciality}</p>
+                                            <p className="font-medium">{selectedAppointment?.docData?.speciality}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Qualification</p>
-                                            <p className="font-medium">{selectedAppointment.docData?.degree}</p>
+                                            <p className="font-medium">{selectedAppointment?.docData?.degree}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Experience</p>
-                                            <p className="font-medium">{selectedAppointment.docData?.experience} years</p>
+                                            <p className="font-medium">{selectedAppointment?.docData?.experience} years</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Consultation Fee</p>
-                                            <p className="font-medium">₹{selectedAppointment.docData?.fees}</p>
+                                            <p className="font-medium">₹{selectedAppointment?.docData?.fees}</p>
                                         </div>
                                         <div>
                                             <p className="text-sm text-gray-500">Availability</p>
                                             <p className="font-medium">
-                                                {selectedAppointment.docData?.available ? 'Available' : 'Not Available'}
+                                                {selectedAppointment?.docData?.available ? 'Available' : 'Not Available'}
                                             </p>
                                         </div>
                                         <div className="md:col-span-3">
                                             <p className="text-sm text-gray-500">About Doctor</p>
-                                            <p className="font-medium">{selectedAppointment.docData?.about}</p>
+                                            <p className="font-medium">{selectedAppointment?.docData?.about}</p>
                                         </div>
                                         <div className="md:col-span-3">
                                             <p className="text-sm text-gray-500">Address</p>
                                             <p className="font-medium">
-                                                {JSON.parse(selectedAppointment.docData?.address || '{}').line1}<br />
-                                                {JSON.parse(selectedAppointment.docData?.address || '{}').line2}
+                                                {
+                                                    (() => {
+                                                        let address = selectedAppointment?.docData?.address;
+                                                        // If address is a string, parse it
+                                                        if (typeof address === "string") {
+                                                            try {
+                                                                address = JSON.parse(address);
+                                                            } catch (err) {
+                                                                address = {}; // fallback if invalid JSON
+                                                            }
+                                                        }
+                                                        return (
+                                                            <>
+                                                                {address?.line1 || ""} <br />
+                                                                {address?.line2 || ""}
+                                                            </>
+                                                        );
+                                                    })()
+                                                }
                                             </p>
                                         </div>
                                     </div>
