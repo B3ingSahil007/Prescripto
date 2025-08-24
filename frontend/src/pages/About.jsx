@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from 'react-helmet'
 import { assets } from '../assets/assets_frontend/assets'
 
 const whyChooseUsData = [

@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 const MyAppointments = () => {
     const { backendUrl, token, getDoctorsData } = useContext(AppContext);

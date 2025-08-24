@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { FiFilter } from "react-icons/fi";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet';
 
 const Doctors = () => {
     const { speciality } = useParams();

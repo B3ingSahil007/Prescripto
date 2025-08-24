@@ -5,7 +5,7 @@ import { AppContext } from '../context/AppContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
     const { token, setToken, backendUrl, setUserData } = useContext(AppContext);

@@ -8,7 +8,7 @@ import RelatedDoctors from "../components/RelatedDoctors";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FaArrowRight } from "react-icons/fa6";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 const Appointment = () => {
     const { docId } = useParams();
