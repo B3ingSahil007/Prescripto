@@ -15,6 +15,7 @@ import Appointment from './pages/Appointment'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer';
 import { AppContext } from './context/AppContext';
+import { Helmet } from "react-helmet-async";
 
 const App = () => {
   // Youtube Time: 15:53:00

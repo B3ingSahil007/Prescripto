@@ -1,8 +1,14 @@
+import { Helmet } from 'react-helmet-async';
 import { assets } from '../assets/assets_frontend/assets';
 
 const Contact = () => {
     return (
         <>
+            <Helmet>
+                <title>Prescripto - Contact</title>
+                <meta name="description" content="Contact Page" />
+                <link rel="canonical" href="/contact" />
+            </Helmet>
             <div className='my-4'>
                 <div data-aos="fade-down" className="text-center text-2xl text-gray-700">
                     <p>CONTACT <span className="text-primary font-medium">US</span></p>

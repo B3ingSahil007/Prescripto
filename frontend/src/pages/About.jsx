@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async'
 import { assets } from '../assets/assets_frontend/assets'
 
 const whyChooseUsData = [
@@ -30,6 +31,11 @@ const whyChooseUsData = [
 const About = () => {
     return (
         <>
+            <Helmet>
+                <title>Prescripto - About Us</title>
+                <meta name="description" content="About Page" />
+                <link rel="canonical" href="/about" />
+            </Helmet>
             <div className='m-0 sm:mx-10'>
                 <div data-aos="fade-down" className='text-center text-2xl pt-10 text-gray-700'>
                     <p>ABOUT <span className='text-primary font-medium'>US</span></p>

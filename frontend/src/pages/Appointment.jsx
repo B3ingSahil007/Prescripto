@@ -8,6 +8,7 @@ import RelatedDoctors from "../components/RelatedDoctors";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FaArrowRight } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 
 const Appointment = () => {
     const { docId } = useParams();
@@ -154,6 +155,11 @@ const Appointment = () => {
 
     return docInfo && (
         <>
+            <Helmet>
+                <title>Prescripto - Appointment</title>
+                <meta name="description" content="Appointment Page" />
+                <link rel="canonical" href="/appointment/:docId" />
+            </Helmet>
             <div className="my-5 ">
                 {/* Doctor Info Card */}
                 <div data-aos="fade-right" className='flex flex-col sm:flex-row gap-4'>
@@ -237,10 +243,10 @@ const Appointment = () => {
                                         }
                                     }}
                                     className={`text-xs sm:text-sm font-light flex-shrink-0 px-3 sm:px-5 py-1 sm:py-2 rounded-full cursor-pointer ${selectedSlot?.time === slot.time && selectedSlot?.datetime.getTime() === slot.datetime.getTime()
-                                            ? 'bg-green-500 text-white'
-                                            : slot.isAvailable
-                                                ? 'bg-blue-100 border !border-blue-300 text-gray-800'
-                                                : 'bg-blue-500 text-white'
+                                        ? 'bg-green-500 text-white'
+                                        : slot.isAvailable
+                                            ? 'bg-blue-100 border !border-blue-300 text-gray-800'
+                                            : 'bg-blue-500 text-white'
                                         } ${!slot.isAvailable ? 'cursor-not-allowed opacity-70' : ''
                                         }`}
                                 >

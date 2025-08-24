@@ -1,0 +1,9 @@
+https://prescripto-frontend-xi-three.vercel.app/
+https://prescripto-frontend-xi-three.vercel.app/login
+https://prescripto-frontend-xi-three.vercel.app/doctors
+https://prescripto-frontend-xi-three.vercel.app/doctors/:speciality
+https://prescripto-frontend-xi-three.vercel.app/about
+https://prescripto-frontend-xi-three.vercel.app/contact
+https://prescripto-frontend-xi-three.vercel.app/myprofile
+https://prescripto-frontend-xi-three.vercel.app/myappointments
+https://prescripto-frontend-xi-three.vercel.app/appointment/:docId

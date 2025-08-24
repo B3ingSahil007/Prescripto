@@ -2,14 +2,20 @@ import Header from '../components/Header'
 import SpecialityMenu from '../components/SpecialityMenu'
 import TopDoctors from '../components/TopDoctors'
 import Banner from '../components/Banner'
+import { Helmet } from 'react-helmet-async'
 
 const Home = () => {
     return (
         <>
+            <Helmet>
+                <title>Prescripto - Home</title>
+                <meta name="description" content="Home Page" />
+                <link rel="canonical" href="/" />
+            </Helmet>
             <Header />
             <SpecialityMenu />
             <TopDoctors />
-            <Banner />  
+            <Banner />
         </>
     )
 }

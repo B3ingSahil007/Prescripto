@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { FiFilter } from "react-icons/fi";
+import { Helmet } from 'react-helmet-async';
 
 const Doctors = () => {
     const { speciality } = useParams();
@@ -45,6 +46,12 @@ const Doctors = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Prescripto - Doctors</title>
+                <meta name="description" content="Doctors Page" />
+                <link rel="canonical" href="/doctors" />
+                <link rel="canonical" href="/doctors/:speciality" />
+            </Helmet>
             <div className="flex flex-col items-center my-4">
                 {speciality ? (
                     <p className="text-xl sm:text-3xl font-medium text-gray-600">
