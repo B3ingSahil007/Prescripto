@@ -3,6 +3,7 @@ import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { assets } from "../assets/assets_frontend/assets";
 import { Helmet } from "react-helmet";
 
 const MyAppointments = () => {
@@ -137,7 +138,15 @@ const MyAppointments = () => {
                             return (
                                 <div key={index} className="bg-white rounded-lg shadow-md border !border-blue-300 sm:p-6 flex flex-col md:flex-row gap-4 sm:gap-6">
                                     <div className="md:w-48 md:flex-shrink-0">
-                                        <img src={item.docData.image} alt={item.docData.name} className="w-full" />
+                                        <img
+                                            src={item.docData.image}
+                                            alt={item.docData.name}
+                                            className="w-full"
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = assets.profile_pic;
+                                            }}
+                                        />
                                     </div>
                                     <div className="flex-grow px-3">
                                         <p className="text-lg sm:text-xl font-semibold">{item.docData.name}</p>

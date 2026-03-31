@@ -145,7 +145,10 @@ const updateProfile = async (req, res) => {
         }
 
         // Handle image upload if present
-        if (imageFile) {
+        const { removeImage } = req.body;
+        if (removeImage === 'true') {
+            updateData.image = "";
+        } else if (imageFile) {
             const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
                 resource_type: "image",
                 folder: "user_profiles" // Optional: organize in Cloudinary

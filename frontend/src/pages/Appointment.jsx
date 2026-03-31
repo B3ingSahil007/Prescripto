@@ -8,6 +8,7 @@ import RelatedDoctors from "../components/RelatedDoctors";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FaArrowRight } from "react-icons/fa6";
+import { assets } from "../assets/assets_frontend/assets";
 import { Helmet } from "react-helmet";
 
 const Appointment = () => {
@@ -164,7 +165,15 @@ const Appointment = () => {
                 {/* Doctor Info Card */}
                 <div data-aos="fade-right" className='flex flex-col sm:flex-row gap-4'>
                     <div className="sm:w-1/3 lg:w-1/4">
-                        <img className='bg-blue-100 border !border-blue-300 w-full rounded-lg' src={docInfo.image} alt="Doctor_Image" />
+                        <img
+                            className='bg-blue-100 border !border-blue-300 w-full rounded-lg'
+                            src={docInfo.image}
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = assets.profile_pic;
+                            }}
+                            alt="Doctor_Image"
+                        />
                     </div>
                     <div className="flex-1 border !border-blue-300 rounded-lg p-4 sm:p-8 py-4 sm:py-7 bg-white sm:mx-0 mt-0 sm:mt-0">
                         <p className="flex items-center gap-2 text-xl sm:text-2xl font-medium text-gray-800 hover:text-primary transition-all duration-300">

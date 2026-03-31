@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { AdminContext } from '../context/AdminContext';
+import { assets } from '../assets/assets_admin/assets';
 
 const DoctorList = () => {
     const { doctors, getAllDoctors, adminToken, changeAvailability } = useContext(AdminContext);
@@ -19,9 +20,13 @@ const DoctorList = () => {
                         <div className='border border-blue-300 rounded-xl w-full sm:max-w-56 overflow-hidden cursor-pointer group' key={index}>
                             <div className='flex flex-col sm:block'>
                                 <img
-                                    className='bg-blue-100 group-hover:bg-blue-200 transition-all duration-300 w-full sm:w-auto  object-cover'
+                                    className='bg-blue-100 group-hover:bg-blue-200 transition-all duration-300 w-full sm:w-auto object-cover'
                                     src={item.image}
                                     alt="Doctor_Image"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = assets.doctor_icon;
+                                    }}
                                 />
                                 <div className='p-3'>
                                     <p className='text-lg font-medium'>{item.name}</p>

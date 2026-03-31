@@ -137,9 +137,18 @@ const Profile = () => {
                         <div className="p-4 bg-blue-300 text-gray-800">
                             <div className="flex flex-col sm:flex-row items-center">
                                 <img
-                                    src={userData.image || assets.user_icon}
+                                    src={userData.image || assets.profile_pic}
+                                    onLoad={(e) => {
+                                        if (e.target.src.includes('undefined')) {
+                                            e.target.src = assets.profile_pic;
+                                        }
+                                    }}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = assets.profile_pic;
+                                    }}
                                     alt="Profile"
-                                    className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-gray-600 shadow-lg mb-4 sm:mb-0 sm:mr-6"
+                                    className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-gray-600 shadow-lg mb-4 sm:mb-0 sm:mr-6 object-cover"
                                 />
                                 <div className="text-center sm:text-left">
                                     <h2 className="text-2xl sm:text-3xl font-bold">{userData.firstname} {userData.lastname}</h2>
@@ -338,13 +347,74 @@ const Profile = () => {
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Profile Image</label>
-                                                <input
-                                                    type="file"
-                                                    accept="image/*"
-                                                    onChange={handleImageChange}
-                                                    className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                                                />
+                                            <div className="flex items-center gap-4">
+                                                <div className="relative group">
+                                                    <img
+                                                        src={image ? URL.createObjectURL(image) : (userData.image || assets.profile_pic)}
+                                                        alt="Preview"
+                                                        className="w-16 h-16 rounded-full object-cover border-2 border-primary"
+                                                        onError={(e) => {
+                                                            e.target.onerror = null;
+                                                            e.target.src = assets.profile_pic;
+                                                        }}
+                                                    />
+                                                    <label htmlFor="profile-upload" className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300">
+                                                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 011.664.89l.812 1.22A2 2 0 0010.07 10H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        </svg>
+                                                    </label>
+                                                </div>
+                                                <div className="flex-1">
+                                                    <input
+                                                        id="profile-upload"
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={handleImageChange}
+                                                        className="hidden"
+                                                    />
+                                                    <div className="flex gap-3">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => document.getElementById('profile-upload').click()}
+                                                            className="text-sm text-primary hover:underline font-medium"
+                                                        >
+                                                            Change Photo
+                                                        </button>
+                                                        {(image || userData.image) && (
+                                                            <button
+                                                                type="button"
+                                                                onClick={async () => {
+                                                                    try {
+                                                                        const formData = new FormData();
+                                                                        formData.append('firstname', userData.firstname);
+                                                                        formData.append('lastname', userData.lastname);
+                                                                        formData.append('email', userData.email);
+                                                                        formData.append('phone', userData.phone);
+                                                                        formData.append('address', JSON.stringify(userData.address));
+                                                                        formData.append('gender', userData.gender);
+                                                                        formData.append('dob', userData.dob);
+                                                                        formData.append('removeImage', 'true');
+
+                                                                        const { data } = await axios.post(backendUrl + '/api/user/update-profile', formData, { headers: { token } });
+                                                                        if (data.success) {
+                                                                            toast.success("Photo Removed");
+                                                                            setImage(null);
+                                                                            await loadUserData();
+                                                                        }
+                                                                    } catch (error) {
+                                                                        toast.error(error.message);
+                                                                    }
+                                                                }}
+                                                                className="text-sm text-red-500 hover:underline font-medium"
+                                                            >
+                                                                Remove Photo
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                    <p className="text-xs text-gray-500 mt-1">PNG, JPG or JPEG (Max. 2MB)</p>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
