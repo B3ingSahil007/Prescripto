@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { assets } from '../assets/assets_frontend/assets';
 import { AppContext } from '../context/AppContext';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
     const { userData, setUserData, token, backendUrl, loadUserData } = useContext(AppContext);
